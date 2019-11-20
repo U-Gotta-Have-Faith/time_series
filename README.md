@@ -7,7 +7,7 @@
 
 ## Goal
 Analyze Fitbit data to
- - Project the two weeks of data missing at the end of the provided data
+ - Project the two weeks of missing data
  - Determine what extra data label was included
  - Create a profile of the person who possesses the Fitbit
 
@@ -45,7 +45,48 @@ https://help.fitbit.com/articles/en_US/Help_article/1141
 -- ratio_sed_cal = ratio of sedentary time to calories
 - NaNs were replaced with 0s
 - The number of 0s per attribute were calculated dates with missing steps and/or distances were identified.
+About a dozen days when the user did not wear the Fitbit  we imputed missing values for steps and distance using rolling median, although we tried 3 additional methods as well. They all performed about the same. 
+
+
+## Exploration
+- Nearly all calories burned are activity calories (r = .97)
+- Steps and distance are perfectaly correlated (r = 1.00)
+- Sedentary minutes are negatively correlated with calories_burned (r = -.57) and activity_calories (r = -.65)
+- There are 0 values for steps in the following dates/date ranges
+    - 6/6 - 6/7
+    - 6/11
+    - 6/26 - 6/30
+    - 7/3 - 7/6
+- Because these dates also lacked distances, we hypothesize that the user of the Fitbit did not wear it on these days.
+- All the missing days are clustered early in the user's history with the Fitbit. No missing days are found after the first quarter of usage.
+- Calorie burning increased as the week progressed
+- No surprise, as the active minutes increased and sedentary minutes decreased, calories increased
+- Calories burned, steps and activity increased over time. Our hypothesis is that the user was motivated in some fashion to become more active
 
 
 
+## Hypotheses
+$H_0$: The Fitbit user has held a steady activity level during the time range of our data.
 
+$H_a$: The Fitbit user has not held a steady activity level during the time range of our data.
+
+We reject the null hypothesis that the user's activity level stayed steady based on data. Data show
+
+- Upward trend in activity for the Fitbit wearer, including a 48% increase in steps and 358% increase in very active minutes. 
+- The wearer's sedentary minutes decreased by 44%
+
+
+
+$H_0$: The Fitbit user wore their activity band every day since the beginning of the data set range.
+
+$H_a$: The Fitbit user did not wear their activity band every day since the beginning of the data set range.
+
+Conclusion: we cannot assess this hypothesis definitively based on available data. However, the data seem to indicate that
+
+- The Fitbit user did not wear their device for approximately 2 weeks during in the first quarter of the date range. Values for steps and distance were both 0 on those days. We do not believe it is possible to take 0 steps in a day, especially for several days in a row.
+
+- The days with 0 values for steps and distance were early in the date range when the user may not have been as committed or accustomed to wearing the band.
+
+- As the activity trend increases, the band is worn consistently.
+
+- We believe there may have been some incentive to wear the band that motivated the user to not only continue to wear the band more and encouraged them to be more active.
