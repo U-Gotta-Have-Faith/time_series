@@ -1,4 +1,4 @@
-# U Gotta have Faith
+# Team U Gotta have Faith
 
 ## Fitbit Project
 
@@ -11,6 +11,10 @@ Analyze Fitbit data to
  - Determine what extra data label was included
  - Create a profile of the person who possesses the Fitbit
 
+## Presentation
+- Link to talking notes: https://docs.google.com/document/d/1ZO2QyTw_OPFJiSD809HGs8NS0LZAUo3cKpqXwfmCoxg/edit?usp=sharing
+- Link to slide deck: https://docs.google.com/document/d/1ZO2QyTw_OPFJiSD809HGs8NS0LZAUo3cKpqXwfmCoxg/edit?usp=sharing
+
 
 ## Included with Github
 - Cleaned data set ready for followup analyses in CSV format
@@ -19,9 +23,11 @@ Analyze Fitbit data to
 - Text files with functions for the various stages of the product
 - Projections for the missing data saved in a CSV file
 
+
 ## Data Source and Background on Fitbit
 - 8 CSV files provided by client from the Fitbit data for a single individual
 - The original data was 225 rows with 9 attributes
+
 
 ### From the Fitbit Website
 How accurate are Fitbit devices?
@@ -62,6 +68,18 @@ About a dozen days when the user did not wear the Fitbit  we imputed missing val
 - Calorie burning increased as the week progressed
 - No surprise, as the active minutes increased and sedentary minutes decreased, calories increased
 - Calories burned, steps and activity increased over time. Our hypothesis is that the user was motivated in some fashion to become more active
+An analysis of missing values indicated that the primary ones that could be recovered without extraordinary means were steps and distance.
+
+
+## Imputing missing values
+- We ran 4 different methods to impute missing values for steps and distance: rolling median, rolling mean, expanding steps and exponentially weighted moving average (EWMA). Every available method except Prophet.
+- All methods returned roughly the same answer (see graph). We arbitrarily chose the rolling median method to impute the missing values
+
+
+## Calculating height of person X
+- We calculated the stride by calculating the ratio of distance to steps
+- Using the average stride we were able to calculate a rough estimate of height = 68 inches.
+- Comparing the average height of men and women in the US, we established that likelihood person X is male is greater than the likelihood person X is female.
 
 
 
@@ -87,6 +105,7 @@ Conclusion: we cannot assess this hypothesis definitively based on available dat
 
 - The days with 0 values for steps and distance were early in the date range when the user may not have been as committed or accustomed to wearing the band.
 
-- As the activity trend increases, the band is worn consistently.
+- As the activity trend increases, the Fitbit is worn consistently.
 
 - We believe there may have been some incentive to wear the band that motivated the user to not only continue to wear the band more and encouraged them to be more active.
+
